@@ -1,0 +1,274 @@
+/* ==========================================================================
+   1. ЛОКАЛЬНЫЕ ШРИФТЫ
+   Убедитесь, что файлы лежат в папке /fonts/
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 700;
+  src: url('fonts/cinzel-700-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/orbitron-400-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 700;
+  src: url('fonts/orbitron-700-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: url('fonts/roboto-300-cyrillic.woff2') format('woff2'),
+       url('fonts/roboto-300-latin.woff2') format('woff2');
+}
+
+
+/* ==========================================================================
+   2. ОСНОВА САЙТА
+   ========================================================================== */
+
+body, html {
+    margin: 0; padding: 0; 
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    overflow-x: hidden !important; /* Нет шатания */
+    
+    font-family: 'Roboto', sans-serif;
+    color: #c0c0c0;
+    background-color: #0a0a10; 
+    box-sizing: border-box; 
+    position: relative;
+}
+
+/* Красивый скроллбар */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0a0a10; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+html { scrollbar-width: thin; scrollbar-color: #333 #0a0a10; }
+
+.fixed-background {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -10;
+    background: radial-gradient(circle at 50% 50%, #202035 0%, #0a0a10 80%, #000000 100%);
+    background-size: cover;
+}
+
+/* ==========================================================================
+   3. ТУМАН И ЭФФЕКТЫ
+   ========================================================================== */
+
+.fog-container {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1; pointer-events: none; overflow: hidden;
+    filter: drop-shadow(0 0 10px white); 
+}
+
+.fog-img {
+    position: absolute; height: 100vh; width: 300vw; z-index: 1;
+    background: url('fog1.png') repeat-x;
+    background-size: auto 100%; 
+    background-position: bottom;
+    animation: fog 60s linear infinite;
+    /* Сине-фиолетовый туман */
+    filter: sepia(100%) hue-rotate(240deg) saturate(250%) opacity(0.6);
+}
+
+.fog-img-second {
+    background: url('fog2.png') repeat-x;
+    background-size: auto 100%;
+    background-position: bottom;
+    animation: fog 40s linear infinite;
+    z-index: 2; 
+    animation-direction: reverse;
+    filter: sepia(100%) hue-rotate(220deg) saturate(200%) opacity(0.5);
+}
+
+@keyframes fog {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-200vw, 0, 0); }
+}
+
+.vignette {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 3;
+    background: radial-gradient(circle, transparent 40%, #000000 130%);
+}
+
+/* ==========================================================================
+   4. КОНТЕНТ (Рамка, Кнопки, Текст)
+   ========================================================================== */
+
+.container {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; min-height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+}
+
+.signature-box { margin-bottom: 25px; text-align: center; }
+.art-text { margin: 4px 0; }
+.hallow { font-size: 2.0em; font-family: 'Orbitron', sans-serif; font-weight: 700; color: #ffffff; text-shadow: 0 0 7px rgba(255, 255, 255, 0.5), 0 0 15px rgba(0, 224, 56, 0.6); }
+.saint { font-size: 1.1em; color: #9effb8; text-shadow: 0 0 5px #00e038; }
+.motto { font-size: 0.9em; font-style: italic; color: #6d9e78; }
+
+.main-frame {
+    width: 95%; max-width: 780px;
+    padding: 10px 20px 40px 20px; /* Увеличен отступ снизу */
+    border: 1px solid rgba(80, 120, 255, 0.3);
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    background-color: rgba(10, 12, 30, 0.5); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+header { margin-bottom: 15px; }
+.title { font-size: 3.2em; font-family: 'Cinzel', serif; font-weight: 700; color: #ffffff; text-shadow: 0 0 5px #fff, 0 0 15px #0077ff, 0 0 30px #0077ff; margin: 0; }
+.subtitle { font-size: 1.0em; color: #aaa; letter-spacing: 2px; margin-top: -5px; }
+
+.project-block { margin-bottom: 15px; }
+.project-title { font-size: 1.6em; font-family: 'Cinzel', serif; color: #ddd; margin-bottom: 15px; letter-spacing: 1px; }
+.project-subtitle { font-size: 0.9em; color: #888; margin-top: -10px; margin-bottom: 20px; letter-spacing: 1px; font-style: italic; }
+
+/* Статус сервера (Зеленая точка) */
+.server-status {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin-bottom: 15px; font-family: 'Orbitron', sans-serif; font-size: 0.9em;
+    color: #9effb8; text-transform: uppercase; letter-spacing: 1px;
+}
+.status-dot {
+    width: 8px; height: 8px; background-color: #00e038; border-radius: 50%;
+    box-shadow: 0 0 10px #00e038; animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    70% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 5px rgba(0, 224, 56, 0); }
+    100% { transform: scale(0.95); opacity: 0.7; }
+}
+
+.server-info { margin-bottom: 5px; font-size: 1.1em; line-height: 1.5; }
+.info-item { color: #aaa; }
+.highlight { color: #DAA520; font-weight: bold; }
+.copy-trigger { cursor: pointer; border-bottom: 1px dashed #DAA520; transition: color 0.3s; }
+.copy-trigger:hover { color: #fff; text-shadow: 0 0 8px #DAA520; }
+.copy-msg { font-size: 0.8em; color: #00e038; opacity: 0; transition: opacity 0.5s ease; height: 1em; }
+
+.buttons-container { display: flex; justify-content: center; gap: 10px; margin: 15px 0; flex-wrap: wrap; }
+.download-button {
+    display: inline-block; padding: 12px 30px;
+    font-size: 1.0em; font-family: 'Cinzel', serif; color: #fff;
+    background: linear-gradient(45deg, #4a00e0, #8e2de2);
+    border: none; border-radius: 5px;
+    text-decoration: none; text-transform: uppercase;
+    transition: all 0.3s ease; 
+    box-shadow: 0 4px 15px rgba(138, 45, 226, 0.4);
+    position: relative; overflow: hidden;
+}
+.download-button:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(138, 45, 226, 0.8), 0 0 10px #fff; }
+
+.divider {
+    width: 70%; margin: 15px auto; border: 0; height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 119, 255, 0), rgba(0, 119, 255, 0.7), rgba(0, 119, 255, 0)); 
+}
+
+footer { width: 100%; margin-top: 15px; }
+.disclaimer { max-width: 600px; margin: 0 auto; font-size: 0.8em; color: #666; padding-top: 15px; border-top: 1px solid rgba(100, 100, 100, 0.2); }
+.disclaimer h2 { font-size: 1em; color: #888; margin-bottom: 5px; }
+.access-info { margin-top: 10px; font-style: italic; color: #888; }
+.disclaimer p { margin: 5px 0; }
+
+/* ==========================================================================
+   5. ДРАКОН (GIF) И ЗВУК
+   ========================================================================== */
+
+.sound-btn {
+    position: fixed; bottom: 20px; left: 20px; z-index: 100;
+    background: rgba(0, 0, 0, 0.6); border: 1px solid #444; color: #aaa;
+    padding: 8px 15px; border-radius: 20px; cursor: pointer;
+    font-family: 'Roboto', sans-serif; font-size: 0.8em;
+    transition: all 0.3s;
+}
+.sound-btn:hover { background: rgba(0, 0, 0, 0.9); color: #fff; }
+.sound-btn.active { border-color: #00e038; color: #00e038; box-shadow: 0 0 10px rgba(0, 224, 56, 0.2); }
+
+.dragon-container {
+    position: fixed; bottom: 0; right: 0; z-index: 5;
+    pointer-events: none; opacity: 0.9;
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+.dragon-img {
+    width: 350px; height: auto;
+    filter: brightness(0.6); /* Затемнение */
+    opacity: 0; /* Скрыт по умолчанию */
+    transition: opacity 12s ease;
+    animation: none; /* Нет CSS анимации для GIF */
+}
+
+/* ==========================================================================
+   6. МОБИЛЬНАЯ ВЕРСИЯ
+   ========================================================================== */
+@media (max-width: 768px) {
+    .dragon-container {
+        position: fixed !important; bottom: 0 !important; right: 0 !important; top: auto !important;
+        width: 150px !important; max-width: 40%;
+        opacity: 0; /* Скрыт */
+        pointer-events: none; z-index: 5; overflow: hidden;
+    }
+    .dragon-img { width: 100%; height: auto; }
+
+    /* Кнопка звука */
+    .sound-btn { bottom: 15px; left: 15px; }
+
+    /* Отступ для текста, чтобы кнопка звука его не закрывала */
+    .disclaimer { padding-bottom: 50px !important; }
+    
+    .fixed-background { background-attachment: scroll; }
+}
+
+/* ==========================================================================
+   7. АДАПТАЦИЯ ПОД БОЛЬШИЕ МОНИТОРЫ (2K / 4K)
+   ========================================================================== */
+@media (min-width: 1921px) {
+    
+    /* 1. Увеличиваем рамку и шрифт */
+    .main-frame {
+        max-width: 1200px; /* Рамка станет шире (было 780) */
+        
+        /* ГЛАВНЫЙ ТРЮК: Увеличиваем базовый шрифт внутри рамки.
+           Так как все отступы и кнопки у нас зависят от шрифта (em),
+           весь интерфейс пропорционально вырастет. */
+        font-size: 1.4em; /* Увеличение на 40% */
+        
+        padding: 20px 40px 60px 40px; /* Больше воздуха */
+    }
+
+    /* 2. Заголовки делаем еще эпичнее */
+    .title {
+        font-size: 4em; /* Было 3.2em */
+    }
+
+    /* 3. Увеличиваем Дракона, чтобы он не потерялся */
+    .dragon-img {
+        width: 500px; /* Было 350px */
+    }
+    
+    /* 4. Туман тоже можно сделать чуть масштабнее */
+    .fog-img {
+        background-size: auto 120%; /* Чуть выше облака */
+    }
+}
